@@ -1,3 +1,4 @@
+import 'package:emotee/di/di.dart';
 import 'package:flutter/material.dart';
 
 import 'theme_color.dart';
@@ -83,7 +84,7 @@ class ThemeButton {
   }) =>
       RawMaterialButton(
         fillColor: enable
-            ? AppColor.greyDC
+            ? themeColor.greyDC
             : Theme.of(context).colorScheme.primary.withAlpha(55),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),

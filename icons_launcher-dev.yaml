@@ -7,4 +7,7 @@ icons_launcher:
       adaptive_foreground_image: "assets/images/icon-foreground-1024x1024.png"
       adaptive_round_image: "assets/images/icon-round-1024x1024.png"
     ios:
-      enable: false
+      enable: true
+      adaptive_background_color: '#7A4EAE'
+      adaptive_foreground_image: "assets/images/icon-foreground-1024x1024.png"
+      adaptive_round_image: "assets/images/icon-round-1024x1024.png"

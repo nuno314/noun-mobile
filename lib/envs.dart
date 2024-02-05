@@ -15,7 +15,7 @@ class Env {
   static final Map<String, dynamic> devEnv = {
     environment: devEnvName,
     developmentMode: kDebugMode,
-    appName: 'FBS_Dev',
+    appName: 'Emotee DEV',
     baseApiLayer: '',
     baseGraphQLUrl: '',
     onesignalAppID: '',
@@ -24,7 +24,7 @@ class Env {
   static final Map<String, dynamic> stagingEnv = {
     environment: stagingEnvName,
     developmentMode: kDebugMode,
-    appName: 'FBS_Staging',
+    appName: 'Emotee',
     baseApiLayer: '',
     baseGraphQLUrl: '',
     onesignalAppID: '',
@@ -33,7 +33,7 @@ class Env {
   static final Map<String, dynamic> prodEnv = {
     environment: prodEnvName,
     developmentMode: kDebugMode,
-    appName: 'FBS',
+    appName: 'Emotee',
     baseApiLayer: '',
     baseGraphQLUrl: '',
     onesignalAppID: '',

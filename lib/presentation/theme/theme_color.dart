@@ -1,7 +1,12 @@
+import 'package:emotee/di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
+import 'package:injectable/injectable.dart';
 
-class AppColor {
+ThemeColor get themeColor => injector.get<ThemeColor>();
+
+@Singleton()
+class ThemeColor {
   static const Color white = Colors.white;
   static const Color primaryColor = Color(0xFF03a1e4);
   static const Color primaryColorLight = Color(0xFF43c8f5);

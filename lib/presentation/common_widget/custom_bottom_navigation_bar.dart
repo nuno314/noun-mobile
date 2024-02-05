@@ -1,24 +1,22 @@
-import 'dart:math';
-
+import 'package:anfin_commodity/common/utils/extensions.dart';
+import 'package:anfin_commodity/presentation/theme/theme_color.dart';
+import 'package:anfin_commodity/presentation/widgets/af_shared_box_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../common/utils/extensions.dart';
-import '../theme/shadow.dart';
-import '../theme/theme_color.dart';
-import 'cache_network_image_wrapper.dart';
-
 class BottomBarItemData {
-  final String? label;
-  final String? icon;
-  final String? selectedIcon;
+  final String iconPath;
+
+  final String selectedIconPath;
   final bool? isOver;
   final int? badgeCount;
+  final String label;
 
   BottomBarItemData({
-    this.label,
-    this.icon,
-    this.selectedIcon,
+    required this.iconPath,
+    required this.selectedIconPath,
+    required this.label,
     this.isOver,
     this.badgeCount,
   });
@@ -57,7 +55,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   void didUpdateWidget(covariant CustomBottomNavigationBar oldWidget) {
-    idxNotifier = ValueNotifier(widget.selectedIdx);
+    idxNotifier.value = widget.selectedIdx;
     super.didUpdateWidget(oldWidget);
   }
 
@@ -69,81 +67,80 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return ValueListenableBuilder<int?>(
-        valueListenable: idxNotifier,
-        builder: (ctx, value, w) {
-          final itemWidth = constraints.maxWidth / widget.items!.length;
-          return Stack(
-            alignment: AlignmentDirectional.bottomCenter,
-            children: [
-              Container(
-                decoration: const BoxDecoration(
-                  boxShadow: boxShadowlight,
-                  color: Colors.white,
+    return ValueListenableBuilder<int?>(
+      valueListenable: idxNotifier,
+      builder: (ctx, value, w) {
+        return Stack(
+          alignment: Alignment.topCenter,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Divider(
+                  height: 1.h,
+                  thickness: 1.h,
+                  color: themeColor.color1B1C26,
                 ),
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom,
+                Container(
+                  decoration: BoxDecoration(
+                    color: themeColor.bottomNavigationBarBackgroundColor,
+                  ),
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).padding.bottom,
+                    top: 11.h,
+                    left: 32.w,
+                    right: 32.w,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: widget.items!.mapIndex<Widget>((item, idx) {
+                      return SizedBox(
+                        width: 80.w,
+                        child: BottomItem(
+                          item: item,
+                          onPressed: () async {
+                            if (idx != value &&
+                                await widget.onItemSelection?.call(idx) ==
+                                    true) {
+                              idxNotifier.value = idx;
+                            }
+                          },
+                          selected: idx == value,
+                        ),
+                      );
+                    }).toList(),
+                  ),
                 ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: widget.items!.mapIndex<Widget>((item, idx) {
-                    if (item.isOver == true) {
-                      return SizedBox(width: itemWidth);
-                    }
-                    return SizedBox(
-                      width: itemWidth,
-                      child: BottomItem(
-                        item: item,
-                        onPressed: () async {
-                          if (idx != value &&
-                              await widget.onItemSelection?.call(idx) == true) {
-                            idxNotifier.value = idx;
-                          }
-                        },
-                        selected: idx == value,
-                      ),
-                    );
-                  }).toList(),
-                ),
+              ],
+            ),
+            AnimatedPositioned(
+              left: value == 0
+                  ? 31.5.w
+                  : value == 1
+                      ? 146.5.w
+                      : 261.5.w,
+              curve: Curves.easeInOutCubicEmphasized,
+              duration: const Duration(milliseconds: 200),
+              child: AFSharedBoxColor(
+                margin: EdgeInsets.only(top: 1.h),
+                height: 3.w,
+                width: 80.w,
+                borderRadius:
+                    BorderRadius.vertical(bottom: Radius.circular(24.r)),
+                color: themeColor.primaryColor,
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom,
-                ),
-                child: Row(
-                  children: widget.items!.mapIndex<Widget>((item, idx) {
-                    if (item.isOver != true) {
-                      return SizedBox(width: itemWidth);
-                    }
-                    return SizedBox(
-                      width: itemWidth,
-                      child: BottomItem(
-                        item: item,
-                        iconSize: itemWidth * 0.9,
-                        onPressed: () async {
-                          if (idx != value &&
-                              await widget.onItemSelection?.call(idx) == true) {
-                            idxNotifier.value = idx;
-                          }
-                        },
-                        selected: idx == value,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ],
-          );
-        },
-      );
-    });
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 
 class BottomItem extends StatelessWidget {
   final BottomBarItemData item;
-  final Function()? onPressed;
+  final void Function()? onPressed;
   final bool selected;
   final double iconSize;
 
@@ -157,69 +154,38 @@ class BottomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final count = item.badgeCount ?? 0;
-    final theme = Theme.of(context);
     return InkWell(
       onTap: onPressed,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: EdgeInsets.only(bottom: 8.h),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 3),
-            if (item.label?.isNotEmpty == true)
-              Text(
-                item.label!,
-                style: _getTextStyle(context),
-                textAlign: TextAlign.center,
-              )
+            selected
+                ? SvgPicture.asset(
+                    item.selectedIconPath,
+                    color: themeColor.primaryColor,
+                    width: 24.r,
+                    height: 24.r,
+                  )
+                : SvgPicture.asset(
+                    item.iconPath,
+                    height: 24.r,
+                    width: 24.r,
+                  ),
+            SizedBox(height: 2.h),
+            Text(
+              item.label,
+              style: TextStyle(
+                fontSize: 10.sp,
+                color:
+                    selected ? themeColor.primaryColor : themeColor.grayB6BEC9,
+                fontWeight: FontWeight.w600,
+              ),
+            )
           ],
         ),
       ),
     );
-  }
-
-  Widget _buildIcon() {
-    final icon = selected == true ? item.selectedIcon! : item.icon!;
-    if (icon.contains('http')) {
-      return CachedNetworkImageWrapper(
-        url: icon,
-        width: iconSize,
-        height: iconSize,
-        fit: BoxFit.cover,
-      );
-    }
-    if (icon.contains('svg')) {
-      return SvgPicture.asset(
-        icon,
-        width: iconSize,
-        height: iconSize,
-        fit: BoxFit.cover,
-      );
-    } else {
-      return Image.asset(
-        icon,
-        fit: BoxFit.cover,
-        width: iconSize,
-        height: iconSize,
-      );
-    }
-  }
-
-  TextStyle _getTextStyle(BuildContext context) {
-    final theme = Theme.of(context);
-    if (selected) {
-      return theme.textTheme.subtitle1!.copyWith(
-          color: theme.colorScheme.secondary,
-          fontSize: 10,
-          fontWeight: FontWeight.bold);
-    } else {
-      return theme.textTheme.subtitle1!.copyWith(
-        color: AppColor.primaryText,
-        fontSize: 10,
-      );
-    }
   }
 }

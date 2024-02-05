@@ -58,6 +58,9 @@ dependencies:
   # A package that allows you to use a native file explorer to pick single or multiple absolute file paths, with extension filtering support.
   file_picker: ^6.1.1
 
+  # Flutter plugin for Firebase Core, enabling connecting to multiple Firebase apps.
+  firebase_core: ^2.25.3
+
   # Flutter Widgets that make it easy to implement the BLoC (Business Logic Component) design pattern. Built to be used with the bloc state management package.
   flutter_bloc: ^8.1.3
 
