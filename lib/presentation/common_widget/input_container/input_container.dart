@@ -232,8 +232,9 @@ class _InputContainerState extends State<InputContainer> {
     return Icon(
       Icons.remove_red_eye,
       size: suffixIconSize,
-      color:
-          _controller?.isShowPass == true ? AppColor.primaryColor : Colors.grey,
+      color: _controller?.isShowPass == true
+          ? themeColor.primaryColor
+          : Colors.grey,
     );
   }
 }

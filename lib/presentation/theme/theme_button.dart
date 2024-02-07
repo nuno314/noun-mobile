@@ -122,7 +122,7 @@ class ThemeButton {
         child: Text(
           title,
           style: getTextStyle(context)!.copyWith(
-            color: reverseColor == true ? AppColor.white : Colors.red,
+            color: reverseColor == true ? themeColor.white : Colors.red,
           ),
           textAlign: TextAlign.center,
         ),

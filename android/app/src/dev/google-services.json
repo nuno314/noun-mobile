@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "143705007397",
-    "project_id": "emotee-dev",
-    "storage_bucket": "emotee-dev.appspot.com"
+    "project_number": "910882605976",
+    "project_id": "emotee-dev-f4f29",
+    "storage_bucket": "emotee-dev-f4f29.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:143705007397:android:46c81132f4525c5d0926cc",
+        "mobilesdk_app_id": "1:910882605976:android:09a81333c70716485939ed",
         "android_client_info": {
-          "package_name": "com.emotee.dev"
+          "package_name": "nuno.emotee.dev"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD0QjvOvDN3Qz5nT5SMzV86v7yi9K655n0"
+          "current_key": "AIzaSyDiilotGRA5NGHkqslgXS-72homqEeqx-w"
         }
       ],
       "services": {

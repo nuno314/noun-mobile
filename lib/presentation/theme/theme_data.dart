@@ -1,4 +1,3 @@
-import 'package:anfin_commodity/presentation/theme/theme_color.dart';
 import 'package:emotee/presentation/theme/theme_color.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +33,6 @@ InputDecorationTheme buildInputDecorationTheme(ThemeColor themeColor) {
 }
 
 AppTheme buildLightTheme() {
-  final themeColor = LightThemeColor();
   final textTheme = AppTextTheme().custom(themeColor);
 
   final theme = ThemeData(
@@ -87,7 +85,6 @@ AppTheme buildLightTheme() {
 }
 
 AppTheme buildDarkTheme() {
-  final themeColor = DarkThemeColor();
   final textTheme = AppTextTheme().custom(themeColor);
 
   final theme = ThemeData(

@@ -66,12 +66,12 @@ android {
 
     productFlavors {
         dev {
-            applicationId "com.emotee.dev"
+            applicationId "nuno.emotee.dev"
             resValue "string", "app_name", "Emotee Dev"
             signingConfig signingConfigs.dev
         }
         prod {
-            applicationId "com.emotee"
+            applicationId "nuno.emotee"
             resValue "string", "app_name", "Emotee"
             signingConfig signingConfigs.prod
         }

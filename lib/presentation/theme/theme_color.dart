@@ -7,40 +7,43 @@ ThemeColor get themeColor => injector.get<ThemeColor>();
 
 @Singleton()
 class ThemeColor {
-  static const Color white = Colors.white;
-  static const Color primaryColor = Color(0xFF03a1e4);
-  static const Color primaryColorLight = Color(0xFF43c8f5);
-  static const Color cardBackground = Color(0xFFf7f8f8);
-  static const Color iconSelected = primaryColor;
-  static const Color iconUnselected = Colors.grey;
-  static const Color lightGrey = Color(0xFFbebebe);
-  static const Color greyDC = Color(0xFFdcdcdc);
-  static const Color scaffoldBackgroundColor = Color(0xFFF1F3F7);
+  final Color white = Colors.white;
+  final Color primaryColor = const Color(0xFF03a1e4);
+  final Color primaryColorLight = const Color(0xFF43c8f5);
+  final Color cardBackground = const Color(0xFFf7f8f8);
+  final Color iconUnselected = Colors.grey;
+  final Color lightGrey = const Color(0xFFbebebe);
+  final Color greyDC = const Color(0xFFdcdcdc);
+  final Color scaffoldBackgroundColor = const Color(0xFFF1F3F7);
 
-  static const Color inactiveColor = Color(0xFF111111);
-  static const Color activeColor = primaryColor;
+  final Color inactiveColor = const Color(0xFF111111);
 
-  static const Color titleMenu = Colors.grey;
-  static const Color primaryIcon = Colors.grey;
-  static const Color green = Color(0xFF4d9e53);
-  static const Color red = Color(0xFFfb4b53);
-  static const Color orange = Color(0xFFff9b1a);
-  static const Color darkBlue = Color(0xFF002d41);
+  final Color colorB6BEC9 = const Color(0xFFB6BEC9);
+  Color get activeColor => primaryColor;
+
+  final Color titleMenu = Colors.grey;
+  final Color primaryIcon = Colors.grey;
+  final Color green = const Color(0xFF4d9e53);
+  final Color red = const Color(0xFFfb4b53);
+  final Color orange = const Color(0xFFff9b1a);
+  final Color darkBlue = const Color(0xFF002d41);
+  final Color color1B1C26 = const Color(0xFF1B1C26);
+  final Color colorF2F2F6 = const Color(0xFFF2F2F6);
 
   //light
-  static const Color primaryText = Colors.black;
-  static const Color subText = Color(0xFF767676);
+  final Color primaryText = Colors.black;
+  final Color subText = const Color(0xFF767676);
 
   //dart
-  static const Color primaryDarkText = Colors.black;
-  static const Color subDarkText = Colors.grey;
+  final Color primaryDarkText = Colors.black;
+  final Color subDarkText = Colors.grey;
 
-  static void setLightStatusBar() {
+  void setLightStatusBar() {
     FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
   }
 
-  static void setDarkStatusBar() {
+  void setDarkStatusBar() {
     FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
     FlutterStatusbarcolor.setStatusBarColor(Colors.transparent);
   }

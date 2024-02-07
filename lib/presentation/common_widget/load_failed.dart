@@ -18,7 +18,7 @@ class LoadFailed extends StatelessWidget {
           child: Text(
             translate(context).failed,
             style: textTheme.subtitle1?.copyWith(
-              color: AppColor.primaryColor,
+              color: themeColor.primaryColor,
             ),
           ),
         ),

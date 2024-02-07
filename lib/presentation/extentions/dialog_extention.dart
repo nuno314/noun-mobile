@@ -10,11 +10,12 @@ Future<dynamic> showNoticeDialog({
   bool useRootNavigator = true,
   bool dismissWhenAction = true,
 }) {
-  final dismissFunc = () {
+  dismissFunc() {
     if (dismissWhenAction) {
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
     }
-  };
+  }
+
   final trans = translate(context);
   return showDialog(
     context: context,
@@ -23,7 +24,7 @@ Future<dynamic> showNoticeDialog({
     builder: (context) {
       final theme = Theme.of(context);
 
-      final showAndroidDialog = () => AlertDialog(
+      showAndroidDialog() => AlertDialog(
             title: Text(
               title ?? trans.inform,
               style: theme.textTheme.headline5,
@@ -124,11 +125,12 @@ Future<dynamic> showNoticeConfirmDialog({
   TextStyle? styleBtnRight,
   TextStyle? styleBtnLeft,
 }) {
-  final dismissFunc = () {
+  dismissFunc() {
     if (dismissWhenAction) {
       Navigator.of(context, rootNavigator: useRootNavigator).pop();
     }
-  };
+  }
+
   final trans = translate(context);
   return showDialog(
     context: context,
@@ -137,7 +139,7 @@ Future<dynamic> showNoticeConfirmDialog({
     builder: (context) {
       final theme = Theme.of(context);
 
-      final showAndroidDialog = () => AlertDialog(
+      showAndroidDialog() => AlertDialog(
             title: Text(
               title,
               style: theme.textTheme.headline5,
@@ -157,7 +159,7 @@ Future<dynamic> showNoticeConfirmDialog({
                   titleBtnCancel ?? trans.cancel,
                   style: styleBtnLeft ??
                       theme.textTheme.button?.copyWith(
-                        color: AppColor.primaryColor,
+                        color: themeColor.primaryColor,
                       ),
                 ),
               ),
@@ -170,7 +172,7 @@ Future<dynamic> showNoticeConfirmDialog({
                   titleBtnDone ?? trans.confirm,
                   style: styleBtnRight ??
                       theme.textTheme.button?.copyWith(
-                        color: AppColor.primaryColor,
+                        color: themeColor.primaryColor,
                       ),
                 ),
               ),

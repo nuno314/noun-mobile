@@ -42,9 +42,9 @@ class _ScreenFormState extends State<ScreenForm> with AfterLayoutMixin {
   @override
   void afterFirstLayout(BuildContext context) {
     if (widget.showHeaderImage) {
-      AppColor.setDarkStatusBar();
+      themeColor.setDarkStatusBar();
     } else {
-      AppColor.setLightStatusBar();
+      themeColor.setLightStatusBar();
     }
   }
 

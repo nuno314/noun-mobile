@@ -1,6 +1,6 @@
-import 'package:anfin_commodity/common/utils/extensions.dart';
-import 'package:anfin_commodity/presentation/theme/theme_color.dart';
-import 'package:anfin_commodity/presentation/widgets/af_shared_box_color.dart';
+import 'package:emotee/common/utils/extensions.dart';
+import 'package:emotee/presentation/common_widget/box_color.dart';
+import 'package:emotee/presentation/theme/theme_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -83,7 +83,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    color: themeColor.bottomNavigationBarBackgroundColor,
+                    color: themeColor.colorF2F2F6,
                   ),
                   padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).padding.bottom,
@@ -122,7 +122,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       : 261.5.w,
               curve: Curves.easeInOutCubicEmphasized,
               duration: const Duration(milliseconds: 200),
-              child: AFSharedBoxColor(
+              child: BoxColor(
                 margin: EdgeInsets.only(top: 1.h),
                 height: 3.w,
                 width: 80.w,
@@ -179,7 +179,7 @@ class BottomItem extends StatelessWidget {
               style: TextStyle(
                 fontSize: 10.sp,
                 color:
-                    selected ? themeColor.primaryColor : themeColor.grayB6BEC9,
+                    selected ? themeColor.primaryColor : themeColor.colorB6BEC9,
                 fontWeight: FontWeight.w600,
               ),
             )
