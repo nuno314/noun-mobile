@@ -1,9 +1,8 @@
-import 'package:emotee/di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 import 'package:injectable/injectable.dart';
 
-ThemeColor get themeColor => injector.get<ThemeColor>();
+ThemeColor get themeColor => ThemeColor();
 
 @Singleton()
 class ThemeColor {

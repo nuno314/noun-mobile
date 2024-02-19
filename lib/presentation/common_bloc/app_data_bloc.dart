@@ -24,7 +24,7 @@ class AppDataBloc extends Cubit<AppData> {
     ClientInfo.languageCode = localDataManager.getLocalization() ??
         AppLocale.defaultLocale.languageCode;
     final data = AppData(
-      localDataManager.getTheme(),
+      SupportedTheme.dark,
       Locale(ClientInfo.languageCode),
     );
     return AppDataBloc._(data);
