@@ -69,7 +69,7 @@ class _SelectionDialogState<T> extends State<SelectionDialog<T>> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   InputContainer(
-                    hint: translate(context).search,
+                    hint: tr.search,
                     onTextChanged: (text) {
                       _debouncer.value = text;
                     },

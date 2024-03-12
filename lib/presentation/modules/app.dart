@@ -49,6 +49,7 @@ class _MyAppState extends State<App> {
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
               ],
+              navigatorKey: navigatorKey,
               supportedLocales: AppLocale.supportedLocales,
               locale: appData?.locale ?? AppLocale.defaultLocale,
               onGenerateRoute: RouteGenerator.generateRoute,

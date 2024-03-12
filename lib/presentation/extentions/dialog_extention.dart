@@ -16,7 +16,6 @@ Future<dynamic> showNoticeDialog({
     }
   }
 
-  final trans = translate(context);
   return showDialog(
     context: context,
     barrierDismissible: barrierDismissible,
@@ -26,7 +25,7 @@ Future<dynamic> showNoticeDialog({
 
       showAndroidDialog() => AlertDialog(
             title: Text(
-              title ?? trans.inform,
+              title ?? tr.inform,
               style: theme.textTheme.headline5,
             ),
             content: Text(
@@ -40,7 +39,7 @@ Future<dynamic> showNoticeDialog({
                   dismissFunc.call();
                   onClose?.call();
                 },
-                child: Text(titleBtn ?? trans.ok),
+                child: Text(titleBtn ?? tr.ok),
               )
             ],
           );
@@ -51,7 +50,7 @@ Future<dynamic> showNoticeDialog({
         return showAndroidDialog();
       } else {
         return CupertinoAlertDialog(
-          title: Text(title ?? trans.inform),
+          title: Text(title ?? tr.inform),
           content: Text(
             message,
             style: theme.textTheme.bodyText2,
@@ -63,7 +62,7 @@ Future<dynamic> showNoticeDialog({
                 dismissFunc.call();
                 onClose?.call();
               },
-              child: Text(titleBtn ?? trans.ok),
+              child: Text(titleBtn ?? tr.ok),
             ),
           ],
         );
@@ -80,15 +79,14 @@ Future<dynamic> showNoticeErrorDialog({
   bool useRootNavigator = true,
   String? titleBtn,
 }) {
-  final trans = translate(context);
   return showNoticeDialog(
     context: context,
     message: message,
     barrierDismissible: barrierDismissible,
     onClose: onClose,
-    titleBtn: titleBtn ?? trans.ok,
+    titleBtn: titleBtn ?? tr.ok,
     useRootNavigator: useRootNavigator,
-    title: trans.error,
+    title: tr.error,
   );
 }
 
@@ -99,15 +97,14 @@ Future<dynamic> showNoticeWarningDialog({
   void Function()? onClose,
   bool useRootNavigator = true,
 }) {
-  final trans = translate(context);
   return showNoticeDialog(
     context: context,
     message: message,
     barrierDismissible: barrierDismissible,
     onClose: onClose,
-    titleBtn: trans.ok,
+    titleBtn: tr.ok,
     useRootNavigator: useRootNavigator,
-    title: trans.warning,
+    title: tr.warning,
   );
 }
 
@@ -131,7 +128,6 @@ Future<dynamic> showNoticeConfirmDialog({
     }
   }
 
-  final trans = translate(context);
   return showDialog(
     context: context,
     barrierDismissible: barrierDismissible,
@@ -156,7 +152,7 @@ Future<dynamic> showNoticeConfirmDialog({
                   onCanceled?.call();
                 },
                 child: Text(
-                  titleBtnCancel ?? trans.cancel,
+                  titleBtnCancel ?? tr.cancel,
                   style: styleBtnLeft ??
                       theme.textTheme.button?.copyWith(
                         color: themeColor.primaryColor,
@@ -169,7 +165,7 @@ Future<dynamic> showNoticeConfirmDialog({
                   onConfirmed?.call();
                 },
                 child: Text(
-                  titleBtnDone ?? trans.confirm,
+                  titleBtnDone ?? tr.confirm,
                   style: styleBtnRight ??
                       theme.textTheme.button?.copyWith(
                         color: themeColor.primaryColor,
@@ -223,7 +219,7 @@ Future<dynamic> showNoticeConfirmDialog({
                 Expanded(
                   child: _buildAction(
                     onTap: onCanceled,
-                    title: titleBtnCancel ?? trans.cancel,
+                    title: titleBtnCancel ?? tr.cancel,
                     style: styleBtnLeft,
                   ),
                 ),
@@ -231,7 +227,7 @@ Future<dynamic> showNoticeConfirmDialog({
                 Expanded(
                   child: _buildAction(
                     onTap: onConfirmed,
-                    title: titleBtnDone ?? trans.confirm,
+                    title: titleBtnDone ?? tr.confirm,
                     style: styleBtnRight,
                   ),
                 ),
@@ -289,7 +285,6 @@ Future<void> showActionDialog(
   bool barrierDismissible = true,
   bool dimissWhenSelect = true,
 }) {
-  final trans = translate(context);
   if (kIsWeb || Platform.isAndroid) {
     return showDialog(
       context: context,
@@ -322,7 +317,7 @@ Future<void> showActionDialog(
               onPressed: () {
                 Navigator.of(context, rootNavigator: useRootNavigator).pop();
               },
-              child: Text(trans.cancel),
+              child: Text(tr.cancel),
             ),
           ],
         );
@@ -376,7 +371,7 @@ Future<void> showActionDialog(
               ).pop();
             },
             child: Text(
-              trans.cancel,
+              tr.cancel,
               style: theme.textTheme.headline5?.copyWith(
                 color: Colors.blue,
                 fontWeight: FontWeight.normal,

@@ -1,4 +1,6 @@
-part of '../utils.dart';
+
+import 'package:emotee/common/config.dart';
+import 'package:logger/logger.dart';
 
 class MyFilter extends LogFilter {
   @override

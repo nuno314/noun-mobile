@@ -1,3 +1,4 @@
+import 'package:emotee/presentation/modules/dashboard/home/home.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../common_widget/text_scale_fixed.dart';
@@ -10,13 +11,14 @@ class RouteGenerator {
         ...WelcomeRoute.getAll(settings),
         ...DashboardRoute.getAll(settings),
         ...LogViewerRoute.getAll(settings),
+        ...HomeRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final _builder = _getAll(settings)[settings.name!];
+    final builder = _getAll(settings)[settings.name!];
 
     return buildRoute(
-      _builder ?? (context) => const SizedBox(),
+      builder ?? (context) => const SizedBox(),
       settings: settings,
     );
   }

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 final myNavigatorObserver = MyNavigatorObserver();
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class MyNavigatorObserver extends NavigatorObserver {
   List<Route<dynamic>> routeStack = [];
 

@@ -58,7 +58,7 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
                   Image.asset(ImageConstant.logoImage),
                   const SizedBox(height: 12),
                   Text(
-                    translate(context).appName.toUpperCase(),
+                    tr.appName.toUpperCase(),
                     style: textTheme.bodyText1!.copyWith(
                       color: themeColor.subText,
                       fontWeight: FontWeight.normal,

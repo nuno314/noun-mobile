@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
-import 'package:injectable/injectable.dart';
 
 ThemeColor get themeColor => ThemeColor();
 
-@Singleton()
 class ThemeColor {
   final Color white = Colors.white;
   final Color primaryColor = const Color(0xFF03a1e4);
@@ -14,6 +12,8 @@ class ThemeColor {
   final Color lightGrey = const Color(0xFFbebebe);
   final Color greyDC = const Color(0xFFdcdcdc);
   final Color scaffoldBackgroundColor = const Color(0xFFF1F3F7);
+
+  final Color transparent = Colors.transparent;
 
   final Color inactiveColor = const Color(0xFF111111);
 

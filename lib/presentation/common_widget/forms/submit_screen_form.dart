@@ -77,7 +77,7 @@ class SubmitScreenForm extends StatelessWidget {
                     Expanded(
                       child: ThemeButton.notRecommend(
                         context: context,
-                        title: cancelBtnTitle ?? translate(context).cancel,
+                        title: cancelBtnTitle ?? tr.cancel,
                         onPressed: onCancel,
                       ),
                     ),
@@ -85,7 +85,7 @@ class SubmitScreenForm extends StatelessWidget {
                     Expanded(
                       child: ThemeButton.recommend(
                         context: context,
-                        title: submitBtnTitle ?? translate(context).confirm,
+                        title: submitBtnTitle ?? tr.confirm,
                         onPressed: onConfirm,
                       ),
                     ),

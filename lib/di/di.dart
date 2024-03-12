@@ -6,6 +6,7 @@ import '../data/data_source/local/local_data_manager.dart';
 import 'di.config.dart';
 
 GetIt injector = GetIt.instance;
+
 @InjectableInit(
   initializerName: r'$initGetIt',
   preferRelativeImports: true,

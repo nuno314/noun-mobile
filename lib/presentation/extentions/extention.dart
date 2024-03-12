@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:emotee/common/components/navigation/navigation_observer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

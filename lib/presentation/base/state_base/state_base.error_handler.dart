@@ -9,7 +9,6 @@ extension StateBaseErrorHandlerExt on StateBase {
       return;
     }
     hideLoading();
-    final trans = translate(context);
     switch (error.type) {
       case ErrorType.unauthorized:
       case ErrorType.grapQLInvalidToken:
@@ -27,7 +26,7 @@ extension StateBaseErrorHandlerExt on StateBase {
         if (error.statusCode != null &&
             error.statusCode! >= 500 &&
             error.statusCode! < 600) {
-          showErrorDialog(trans.technicalIssues);
+          showErrorDialog(tr.technicalIssues);
         } else {
           onLogicError(error.message);
         }
@@ -37,7 +36,7 @@ extension StateBaseErrorHandlerExt on StateBase {
           break;
         }
         errorTypeShowing = ErrorType.timeout;
-        showErrorDialog(trans.connectionTimeout);
+        showErrorDialog(tr.connectionTimeout);
         break;
       case ErrorType.noInternet:
         if (errorTypeShowing == ErrorType.noInternet) {
@@ -48,7 +47,7 @@ extension StateBaseErrorHandlerExt on StateBase {
           if (value == ConnectivityResult.none) {
             showNoInternetDialog();
           } else {
-            showErrorDialog(trans.technicalIssues);
+            showErrorDialog(tr.technicalIssues);
           }
         });
         break;
@@ -57,7 +56,7 @@ extension StateBaseErrorHandlerExt on StateBase {
           break;
         }
         errorTypeShowing = ErrorType.unknown;
-        showErrorDialog(trans.unknownError);
+        showErrorDialog(tr.unknownError);
         break;
       case ErrorType.grapQLUnknown:
         if (errorTypeShowing == ErrorType.grapQLUnknown) {
@@ -71,7 +70,7 @@ extension StateBaseErrorHandlerExt on StateBase {
           break;
         }
         errorTypeShowing = ErrorType.serverUnExpected;
-        showErrorDialog(trans.serverMaintenance);
+        showErrorDialog(tr.serverMaintenance);
         break;
       default:
         break;

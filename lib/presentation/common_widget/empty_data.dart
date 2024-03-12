@@ -21,7 +21,7 @@ class EmptyData extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              translate(context).noData,
+              tr.noData,
               style: Theme.of(context).textTheme.subtitle2,
             )
           ],

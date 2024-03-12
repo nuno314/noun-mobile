@@ -1,22 +1,26 @@
-import 'package:emotee/common/utils/extensions.dart';
-import 'package:emotee/presentation/common_widget/box_color.dart';
-import 'package:emotee/presentation/theme/theme_color.dart';
+import 'dart:math';
+
+import 'package:badges/badges.dart' as badges;
+import 'package:emotee/presentation/theme/shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../common/utils.dart';
+import '../theme/theme_color.dart';
+import 'smart_image.dart';
 
 class BottomBarItemData {
-  final String iconPath;
+  /// [icon] supported [String, IconData, Widget]
+  final dynamic icon;
 
-  final String selectedIconPath;
+  /// [selectedIcon] supported [String, IconData, Widget, NULL]
+  final dynamic selectedIcon;
   final bool? isOver;
   final int? badgeCount;
-  final String label;
 
   BottomBarItemData({
-    required this.iconPath,
-    required this.selectedIconPath,
-    required this.label,
+    this.icon,
+    this.selectedIcon,
     this.isOver,
     this.badgeCount,
   });
@@ -55,7 +59,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   void didUpdateWidget(covariant CustomBottomNavigationBar oldWidget) {
-    idxNotifier.value = widget.selectedIdx;
+    idxNotifier = ValueNotifier(widget.selectedIdx);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -71,64 +75,38 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       valueListenable: idxNotifier,
       builder: (ctx, value, w) {
         return Stack(
-          alignment: Alignment.topCenter,
+          alignment: AlignmentDirectional.bottomCenter,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Divider(
-                  height: 1.h,
-                  thickness: 1.h,
-                  color: themeColor.color1B1C26,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: themeColor.colorF2F2F6,
-                  ),
-                  padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).padding.bottom,
-                    top: 11.h,
-                    left: 32.w,
-                    right: 32.w,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: widget.items!.mapIndex<Widget>((item, idx) {
-                      return SizedBox(
-                        width: 80.w,
-                        child: BottomItem(
-                          item: item,
-                          onPressed: () async {
-                            if (idx != value &&
-                                await widget.onItemSelection?.call(idx) ==
-                                    true) {
-                              idxNotifier.value = idx;
-                            }
-                          },
-                          selected: idx == value,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ],
-            ),
-            AnimatedPositioned(
-              left: value == 0
-                  ? 31.5.w
-                  : value == 1
-                      ? 146.5.w
-                      : 261.5.w,
-              curve: Curves.easeInOutCubicEmphasized,
-              duration: const Duration(milliseconds: 200),
-              child: BoxColor(
-                margin: EdgeInsets.only(top: 1.h),
-                height: 3.w,
-                width: 80.w,
-                borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(24.r)),
-                color: themeColor.primaryColor,
+            Container(
+              decoration: BoxDecoration(
+                color: themeColor.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: boxShadowlight,
+              ),
+              margin: EdgeInsets.fromLTRB(
+                16.w,
+                0,
+                16.w,
+                MediaQuery.of(context).padding.bottom,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: widget.items!.mapIndex<Widget>(
+                  (item, idx) {
+                    return Expanded(
+                      child: BottomItem(
+                        item: item,
+                        onPressed: () async {
+                          if (idx != value &&
+                              await widget.onItemSelection?.call(idx) == true) {
+                            idxNotifier.value = idx;
+                          }
+                        },
+                        selected: idx == value,
+                      ),
+                    );
+                  },
+                ).toList(),
               ),
             ),
           ],
@@ -154,38 +132,75 @@ class BottomItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    assert(
+      item.icon is String || item.icon is IconData || item.icon is Widget,
+      'BottomBarItemData.icon supported [String, IconData, Widget]',
+    );
+    assert(
+      item.selectedIcon == null ||
+          item.selectedIcon is String ||
+          item.selectedIcon is IconData ||
+          item.selectedIcon is Widget,
+      '''BottomBarItemData.selectedIcon supported [String, IconData, Widget, NULL]''',
+    );
+    final count = item.badgeCount ?? 0;
+    final theme = context.theme;
     return InkWell(
       onTap: onPressed,
       child: Padding(
-        padding: EdgeInsets.only(bottom: 8.h),
+        padding: const EdgeInsets.symmetric(vertical: 8),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            selected
-                ? SvgPicture.asset(
-                    item.selectedIconPath,
-                    color: themeColor.primaryColor,
-                    width: 24.r,
-                    height: 24.r,
-                  )
-                : SvgPicture.asset(
-                    item.iconPath,
-                    height: 24.r,
-                    width: 24.r,
-                  ),
-            SizedBox(height: 2.h),
-            Text(
-              item.label,
-              style: TextStyle(
-                fontSize: 10.sp,
-                color:
-                    selected ? themeColor.primaryColor : themeColor.colorB6BEC9,
-                fontWeight: FontWeight.w600,
+            badges.Badge(
+              showBadge: count > 0,
+              badgeContent: Text(
+                '${min(count, 99)}${count > 99 ? '+' : ''}',
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontSize: 12,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            )
+              badgeAnimation: const badges.BadgeAnimation.scale(
+                toAnimate: true,
+                animationDuration: Duration(milliseconds: 250),
+              ),
+              badgeStyle: badges.BadgeStyle(
+                padding: EdgeInsets.all(count > 9 ? 3 : 5),
+                shape: badges.BadgeShape.circle,
+              ),
+              child: _buildIcon(),
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildIcon() {
+    final icon =
+        (selected == true ? item.selectedIcon : item.icon) ?? item.icon;
+    if (icon is Widget) {
+      return icon;
+    }
+    if (icon is IconData) {
+      return Icon(
+        icon,
+        size: iconSize,
+        color: selected ? themeColor.primaryColor : Colors.grey,
+      );
+    }
+    if (icon is! String) {
+      return const SizedBox();
+    }
+    return SmartImage(
+      image: icon,
+      width: iconSize,
+      height: iconSize,
+      fit: BoxFit.cover,
     );
   }
 }

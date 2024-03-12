@@ -1,4 +1,5 @@
-part of '../utils.dart';
+
+import 'package:date_format/date_format.dart';
 
 class DateUtils {
   static const List<String> normalFullFormat = [

@@ -1,7 +1,7 @@
 part of 'extention.dart';
 
-AppLocalizations translate(BuildContext context) =>
-    AppLocalizations.of(context)!;
+AppLocalizations get tr =>
+    AppLocalizations.of(navigatorKey.currentState!.context)!;
 
 extension DiacriticsAwareString on String {
   static const diacritics =

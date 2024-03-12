@@ -1,5 +1,3 @@
-part of '../utils.dart';
-
 class JwtUtils {
   static bool isAboutToExpire(
     String token, {

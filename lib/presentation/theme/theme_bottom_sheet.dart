@@ -138,7 +138,7 @@ class ThemeBottomSheet {
                 vertical: 16,
               ),
               child: Text(
-                translate(context).cancel,
+                tr.cancel,
                 style: theme.textTheme.button?.copyWith(
                   color: Colors.blue,
                 ),
