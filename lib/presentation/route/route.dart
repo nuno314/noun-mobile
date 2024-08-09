@@ -1,3 +1,4 @@
+import 'package:emotee/presentation/modules/auth/login/login_route.dart';
 import 'package:emotee/presentation/modules/dashboard/home/home.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -12,6 +13,7 @@ class RouteGenerator {
         ...DashboardRoute.getAll(settings),
         ...LogViewerRoute.getAll(settings),
         ...HomeRoute.getAll(settings),
+        ...LoginRoute.getAll(settings),
       };
 
   static Route<dynamic> generateRoute(RouteSettings settings) {

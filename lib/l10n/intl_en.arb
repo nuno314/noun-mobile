@@ -36,5 +36,21 @@
   "resetPassword": "Reset Password",
   "pleaseEnterEmailToResetPassword": "Please enter your email address to search for your account.",
   "checkMail": "Check your inbox for a link to reset your password.",
-  "emo": "Emo"
+  "emo": "Emo",
+  "pleaseEnterEmail": "Please enter email",
+  "enterEmail": "Enter email",
+  "invalidPassword": " số và kí tự đặc biệt)",
+  "pleaseEnterPassword": "Please enter password",
+  "enterPassword": "Enter password",
+  "reEnterPassword": "Re-enter password",
+  "pleaseReEnterPassword": "Please re-enter password",
+  "passwordNotMatch": "Password does not match",
+  "emailAlreadyExists": "The account already exists for that email",
+  "successSignUp": "Sign up success!",
+  "userNotFound": "No user found for that email",
+  "wrongPassword": "Wrong password",
+  "invalidAccount": "Wrong email or password",
+  "username": "Username",
+  "bio": "Bio",
+  "avatar": "Avatar"
 }

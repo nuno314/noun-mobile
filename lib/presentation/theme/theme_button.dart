@@ -1,11 +1,10 @@
-import 'package:emotee/di/di.dart';
 import 'package:flutter/material.dart';
 
 import 'theme_color.dart';
 
 class ThemeButton {
   static TextStyle? getTextStyle(BuildContext context) {
-    return Theme.of(context).textTheme.button;
+    return Theme.of(context).textTheme.labelLarge;
   }
 
   static Widget primary({
@@ -14,12 +13,14 @@ class ThemeButton {
     Function()? onPressed,
     EdgeInsetsGeometry padding = const EdgeInsets.symmetric(horizontal: 16),
     BoxConstraints constraints = const BoxConstraints(minHeight: 48.0),
+    Color? color,
     bool enable = true,
   }) =>
       RawMaterialButton(
         fillColor: enable
-            ? Theme.of(context).colorScheme.primary
-            : Theme.of(context).colorScheme.primary.withAlpha(55),
+            ? (color ?? Theme.of(context).colorScheme.primary)
+            : (color?.withAlpha(55) ??
+                Theme.of(context).colorScheme.primary.withAlpha(55)),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),

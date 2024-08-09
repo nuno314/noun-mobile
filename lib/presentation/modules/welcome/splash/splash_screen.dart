@@ -59,7 +59,7 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
                   const SizedBox(height: 12),
                   Text(
                     tr.appName.toUpperCase(),
-                    style: textTheme.bodyText1!.copyWith(
+                    style: textTheme.bodyLarge!.copyWith(
                       color: themeColor.subText,
                       fontWeight: FontWeight.normal,
                       fontSize: 18,
@@ -74,7 +74,7 @@ class _SplashScreenState extends StateBase<SplashScreen> with AfterLayoutMixin {
               right: 0,
               child: Text(
                 'Powered By Flutter Base Tructure',
-                style: textTheme.bodyText2!.copyWith(
+                style: textTheme.bodyMedium!.copyWith(
                   color: themeColor.subText,
                   fontSize: 12,
                 ),

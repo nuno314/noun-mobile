@@ -36,6 +36,16 @@ class InputContainerController extends ValueNotifier<InputContainerProperties> {
     notifyListeners();
   }
 
+  set text(String? v) {
+    value.tdController.let((ctrl) {
+      ctrl.value = ctrl.value.copyWith(
+        text: v,
+        selection: TextSelection.collapsed(offset: v?.length ?? 0),
+      );
+    });
+    resetValidation();
+  }
+
   void setError(String? message, {bool focusOn = true}) {
     if (focusOn) {
       value.focusNode.requestFocus();

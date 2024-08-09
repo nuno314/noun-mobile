@@ -8,7 +8,7 @@ import 'bloc/${moduleNameKey}_bloc.dart';
 import 'views/${moduleNameKey}_screen.dart';
 
 class ${classNameKey}Route {
-  Map<String, WidgetBuilder> getAll(RouteSettings settings) => {
+  static Map<String, WidgetBuilder> getAll(RouteSettings settings) => {
         ${classNameKey}Screen.routeName: (context) {
           return BlocProvider<${classNameKey}Bloc>(
             create: (context) => injector(),

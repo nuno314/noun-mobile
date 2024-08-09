@@ -36,5 +36,21 @@
   "resetPassword": "Đặt Lại Mật Khẩu",
   "pleaseEnterEmailToResetPassword": "Vui lòng nhập email để tìm kiếm tài khoản của bạn.",
   "checkMail": "Kiểm tra hộp thư đến trong email để đặt lại mật khẩu của bạn.",
-  "emo": "Cảm"
+  "emo": "Cảm",
+  "pleaseEnterEmail": "Vui lòng nhập email",
+  "enterEmail": "Nhập email",
+  "invalidPassword": "Mật khẩu phải có ít nhất 6 kí tự (bao gồm chữ",
+  "pleaseEnterPassword": "Vui lòng nhập mật khẩu",
+  "enterPassword": "Nhập mật khẩu",
+  "reEnterPassword": "Nhập lại mật khẩu",
+  "pleaseReEnterPassword": "Vui lòng nhập lại mật khẩu",
+  "passwordNotMatch": "Mật khẩu không khớp",
+  "emailAlreadyExists": "Tài khoản email đó đã tồn tại",
+  "successSignUp": "Đăng ký thành công!",
+  "userNotFound": "Không tìm thấy người dùng nào cho email này",
+  "wrongPassword": "Sai mật khẩu",
+  "invalidAccount": "Sai email hoặc mật khẩu",
+  "username": "Tên người dùng",
+  "bio": "Tiểu sử",
+  "avatar": "Ảnh đại diện"
 }

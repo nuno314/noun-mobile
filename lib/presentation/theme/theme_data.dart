@@ -36,7 +36,7 @@ AppTheme buildLightTheme() {
   final textTheme = AppTextTheme().custom(themeColor);
 
   final theme = ThemeData(
-    fontFamily: 'BeVietnamPro',
+    fontFamily: 'Montserrat',
     brightness: Brightness.light,
     appBarTheme: AppBarTheme(
       color: themeColor.scaffoldBackgroundColor,
@@ -74,7 +74,7 @@ AppTheme buildLightTheme() {
     colorScheme: ColorScheme.fromSwatch().copyWith(
       primary: themeColor.primaryColor,
       secondary: themeColor.primaryColorLight,
-      background: Colors.white,
+      surface: Colors.white,
     ),
     platform: TargetPlatform.iOS,
   );
@@ -99,7 +99,7 @@ AppTheme buildDarkTheme() {
       ),
       elevation: 0,
     ),
-    fontFamily: 'BeVietnamPro',
+    fontFamily: 'Montserrat',
     primaryColorLight: themeColor.primaryColorLight,
     primaryColor: themeColor.primaryColor,
     scaffoldBackgroundColor: themeColor.scaffoldBackgroundColor,

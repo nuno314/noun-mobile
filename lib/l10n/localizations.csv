@@ -41,3 +41,19 @@ resetPassword,Đặt Lại Mật Khẩu,Reset Password
 pleaseEnterEmailToResetPassword,Vui lòng nhập email để tìm kiếm tài khoản của bạn.,Please enter your email address to search for your account.
 checkMail,Kiểm tra hộp thư đến trong email để đặt lại mật khẩu của bạn.,Check your inbox for a link to reset your password.
 emo,Cảm,Emo
+pleaseEnterEmail,Vui lòng nhập email,Please enter email
+enterEmail,Nhập email,Enter email
+invalidPassword,Mật khẩu phải có ít nhất 6 kí tự (bao gồm chữ, số và kí tự đặc biệt),Password must be at least 6 characters (including letters, numbers and special characters)
+pleaseEnterPassword,Vui lòng nhập mật khẩu,Please enter password
+enterPassword,Nhập mật khẩu,Enter password
+reEnterPassword,Nhập lại mật khẩu,Re-enter password
+pleaseReEnterPassword,Vui lòng nhập lại mật khẩu,Please re-enter password
+passwordNotMatch,Mật khẩu không khớp,Password does not match
+emailAlreadyExists,Tài khoản email đó đã tồn tại,The account already exists for that email
+successSignUp,Đăng ký thành công!,Sign up success!
+userNotFound,Không tìm thấy người dùng nào cho email này,No user found for that email
+wrongPassword,Sai mật khẩu,Wrong password
+invalidAccount,Sai email hoặc mật khẩu,Wrong email or password
+username,Tên người dùng,Username
+bio,Tiểu sử,Bio
+avatar,Ảnh đại diện,Avatar

@@ -26,11 +26,11 @@ Future<dynamic> showNoticeDialog({
       showAndroidDialog() => AlertDialog(
             title: Text(
               title ?? tr.inform,
-              style: theme.textTheme.headline5,
+              style: theme.textTheme.headlineSmall,
             ),
             content: Text(
               message,
-              style: theme.textTheme.bodyText2,
+              style: theme.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
             actions: [
@@ -53,7 +53,7 @@ Future<dynamic> showNoticeDialog({
           title: Text(title ?? tr.inform),
           content: Text(
             message,
-            style: theme.textTheme.bodyText2,
+            style: theme.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
           actions: <Widget>[
@@ -138,11 +138,11 @@ Future<dynamic> showNoticeConfirmDialog({
       showAndroidDialog() => AlertDialog(
             title: Text(
               title,
-              style: theme.textTheme.headline5,
+              style: theme.textTheme.headlineSmall,
             ),
             content: Text(
               message,
-              style: theme.textTheme.bodyText2,
+              style: theme.textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),
             actions: [
@@ -154,7 +154,7 @@ Future<dynamic> showNoticeConfirmDialog({
                 child: Text(
                   titleBtnCancel ?? tr.cancel,
                   style: styleBtnLeft ??
-                      theme.textTheme.button?.copyWith(
+                      theme.textTheme.labelLarge?.copyWith(
                         color: themeColor.primaryColor,
                       ),
                 ),
@@ -167,7 +167,7 @@ Future<dynamic> showNoticeConfirmDialog({
                 child: Text(
                   titleBtnDone ?? tr.confirm,
                   style: styleBtnRight ??
-                      theme.textTheme.button?.copyWith(
+                      theme.textTheme.labelLarge?.copyWith(
                         color: themeColor.primaryColor,
                       ),
                 ),
@@ -195,7 +195,7 @@ Future<dynamic> showNoticeConfirmDialog({
             child: Text(
               title,
               style: style ??
-                  theme.textTheme.button!.copyWith(
+                  theme.textTheme.labelLarge!.copyWith(
                     color: Colors.blue,
                     fontWeight: FontWeight.normal,
                   ),
@@ -206,11 +206,11 @@ Future<dynamic> showNoticeConfirmDialog({
         return CupertinoAlertDialog(
           title: Text(
             title,
-            style: theme.textTheme.headline5,
+            style: theme.textTheme.headlineSmall,
           ),
           content: Text(
             message,
-            style: theme.textTheme.bodyText2,
+            style: theme.textTheme.bodyMedium,
             textAlign: TextAlign.center,
           ),
           actions: <Widget>[
@@ -240,42 +240,125 @@ Future<dynamic> showNoticeConfirmDialog({
   );
 }
 
-Future<void> showModal(
-  BuildContext context,
-  Widget content, {
+
+Widget buildModalBottomSheet({
+  required BuildContext context,
+  required Widget body,
   bool useRootNavigator = true,
   double? bottomPadding,
+  String? title,
+  void Function()? onClose,
 }) {
-  return showModalBottomSheet<void>(
+  final mediaData = MediaQuery.of(context);
+
+  final padding = mediaData.padding;
+  final size = mediaData.size;
+  final maxContentSize = size.height - padding.top - padding.bottom - 64;
+  final _scrollController = ScrollController();
+  final themeColor = Theme.of(context).colorScheme;
+  return Padding(
+    padding: mediaData.viewInsets,
+    child: Wrap(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(
+            bottom: bottomPadding ?? mediaData.padding.bottom,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: const BorderRadiusDirectional.only(
+              topEnd: Radius.circular(8),
+              topStart: Radius.circular(8),
+            ),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 4,
+                color: Colors.black12,
+              )
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      title ?? '',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    key: const ValueKey('ModalBottomSheet_close_btn'),
+                    onPressed: onClose ??
+                        () => Navigator.of(
+                              context,
+                              rootNavigator: useRootNavigator,
+                            ).pop(),
+                    icon: Icon(
+                      Icons.close,
+                      size: 24,
+                      color: themeColor.primary,
+                    ),
+                  ),
+                ],
+              ),
+              Divider(
+                height: 1,
+                thickness: 0.2,
+                color: themeColor.primary,
+              ),
+              Container(
+                constraints: BoxConstraints(maxHeight: maxContentSize),
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  physics: const BouncingScrollPhysics(),
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  child: body,
+                ),
+              )
+            ],
+          ),
+        )
+      ],
+    ),
+  );
+}
+
+
+Future<dynamic> showModal(
+  BuildContext context,
+  Widget body, {
+  bool useRootNavigator = true,
+  double? bottomPadding,
+  String? title,
+  void Function()? onClose,
+}) {
+  return showModalBottomSheet<dynamic>(
     context: context,
     useRootNavigator: useRootNavigator,
-    backgroundColor: Colors.transparent,
+    backgroundColor: Colors.white,
     isScrollControlled: true,
     builder: (BuildContext context) {
-      return Padding(
-        padding: MediaQuery.of(context).viewInsets,
-        child: Wrap(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(
-                bottom: bottomPadding ?? MediaQuery.of(context).padding.bottom,
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-                borderRadius: const BorderRadiusDirectional.only(
-                  topEnd: Radius.circular(8),
-                  topStart: Radius.circular(8),
-                ),
-                boxShadow: boxShadowDark,
-              ),
-              child: content,
-            )
-          ],
-        ),
+      return buildModalBottomSheet(
+        context: context,
+        body: body,
+        bottomPadding: bottomPadding,
+        onClose: onClose,
+        title: title,
+        useRootNavigator: useRootNavigator,
       );
     },
   );
 }
+
+
 
 Future<void> showActionDialog(
   BuildContext context, {
@@ -294,7 +377,7 @@ Future<void> showActionDialog(
         return AlertDialog(
           title: Text(
             title,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headlineSmall,
           ),
           actions: [
             ...actions.entries
@@ -349,7 +432,7 @@ Future<void> showActionDialog(
                 },
                 child: Text(
                   e.key,
-                  style: theme.textTheme.headline5?.copyWith(
+                  style: theme.textTheme.headlineSmall?.copyWith(
                     color: Colors.blue,
                     fontWeight: FontWeight.normal,
                   ),
@@ -360,7 +443,7 @@ Future<void> showActionDialog(
           ],
           title: Text(
             title,
-            style: theme.textTheme.subtitle1,
+            style: theme.textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
           cancelButton: CupertinoActionSheetAction(
@@ -372,7 +455,7 @@ Future<void> showActionDialog(
             },
             child: Text(
               tr.cancel,
-              style: theme.textTheme.headline5?.copyWith(
+              style: theme.textTheme.headlineSmall?.copyWith(
                 color: Colors.blue,
                 fontWeight: FontWeight.normal,
               ),

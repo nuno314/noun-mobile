@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common_widget/export.dart';
+import 'account/account.dart';
 import 'cubit/dashboard_cubit.dart';
 import 'home/home.dart';
 
@@ -42,7 +43,18 @@ class _DashboardScreenState extends StateBase<DashboardScreen> {
                       child: const HomeScreen(),
                     ),
                   ),
-                  Container(),
+                  KeepAliveWidget(
+                    child: BlocProvider(
+                      create: (context) => injector.get<AccountBloc>(),
+                      child: const AccountScreen(),
+                    ),
+                  ),
+                  KeepAliveWidget(
+                    child: BlocProvider(
+                      create: (context) => injector.get<AccountBloc>(),
+                      child: const AccountScreen(),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -73,13 +85,9 @@ class _DashboardScreenState extends StateBase<DashboardScreen> {
   }
 
   void _cubitListener(BuildContext context, DashboardState state) {
-    if (state is DashboardPost) {
-      context.goToPost();
-    } else {
-      _pageController.jumpToPage(
-        state.index,
-      );
-    }
+    _pageController.jumpToPage(
+      state.index,
+    );
   }
 
   DashboardCubit get _cubit => BlocProvider.of(context);

@@ -1,3 +1,4 @@
+import 'package:emotee/common/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -106,6 +107,9 @@ class _InputContainerState extends State<InputContainer> {
       builder: (ctx, value, w) {
         Widget body;
         final textField = TextField(
+          onTapOutside: (event) {
+            FocusScope.of(context).unfocus();
+          },
           textAlign: widget.textAlign,
           focusNode: value.focusNode,
           readOnly: widget.readOnly || !widget.enable,
@@ -118,9 +122,9 @@ class _InputContainerState extends State<InputContainer> {
               vertical: 6,
             ),
             hintText: widget.hint,
-            hintStyle: widget.hintStyle ?? themeData.textTheme.subtitle2,
+            hintStyle: widget.hintStyle ?? themeData.textTheme.titleSmall,
             errorText: value.validation,
-            errorStyle: themeData.textTheme.subtitle1?.copyWith(
+            errorStyle: themeData.textTheme.titleMedium?.copyWith(
               color: Colors.red,
               fontSize: value.validation?.isNotEmpty == true ? null : 1,
             ),
@@ -146,11 +150,11 @@ class _InputContainerState extends State<InputContainer> {
                   )
                 : null,
             fillColor: widget.enable ? widget.fillColor : null,
-            counterStyle: themeData.textTheme.subtitle1,
+            counterStyle: themeData.textTheme.titleMedium,
           ),
           keyboardType: widget.keyboardType,
           textCapitalization: widget.textCapitalization,
-          style: widget.textStyle ?? themeData.textTheme.bodyText2,
+          style: widget.textStyle ?? themeData.textTheme.bodyMedium,
           obscureText:
               widget.isPassword && widget.controller?.isShowPass != true,
           onChanged: (text) {
@@ -172,12 +176,12 @@ class _InputContainerState extends State<InputContainer> {
                 child: RichText(
                   text: TextSpan(
                     text: widget.title!.toUpperCase(),
-                    style: themeData.textTheme.headline6,
+                    style: themeData.textTheme.bodyLarge,
                     children: [
                       if (widget.isRequired == true)
                         TextSpan(
                           text: ' *',
-                          style: themeData.textTheme.headline6,
+                          style: themeData.textTheme.titleLarge,
                         ),
                     ],
                   ),
@@ -198,14 +202,14 @@ class _InputContainerState extends State<InputContainer> {
               border: widget.showBorder
                   ? OutlineInputBorder(
                       borderSide: widget.borderSide ??
-                          const BorderSide(color: Colors.grey, width: 1),
+                          const BorderSide(color: Colors.black, width: 1),
                       borderRadius: BorderRadius.circular(6.0),
                     )
                   : InputBorder.none,
               enabledBorder: widget.showBorder
                   ? OutlineInputBorder(
                       borderSide: widget.borderSide ??
-                          const BorderSide(color: Colors.grey, width: 1),
+                          const BorderSide(color: Colors.black, width: 1),
                       borderRadius: BorderRadius.circular(6.0),
                     )
                   : InputBorder.none,

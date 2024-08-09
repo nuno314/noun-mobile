@@ -1,4 +1,3 @@
-
 import 'package:emotee/common/constants/app_locale.dart';
 import 'package:emotee/common/utils/data_checker.dart';
 import 'package:emotee/common/utils/number_format_utils.dart';
@@ -261,7 +260,7 @@ extension WeightExt on int {
   String formatNumber({String prefix = ''}) {
     const pattern = r'(\d{1,3})(?=(\d{3})+(?!\d))';
     final regExp = RegExp(pattern);
-    final mathFunc = (Match match) => '${match[1]},';
+    mathFunc(Match match) => '${match[1]},';
     return '${toString().replaceAllMapped(regExp, mathFunc)}$prefix';
   }
 }

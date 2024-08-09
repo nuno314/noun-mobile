@@ -6,7 +6,7 @@ import '../dashboard_constants.dart';
 
 part 'dashboard_state.dart';
 
-@LazySingleton()
+@Injectable()
 class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit() : super(DashboardHome());
 

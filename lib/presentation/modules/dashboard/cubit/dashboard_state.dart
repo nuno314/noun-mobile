@@ -12,7 +12,7 @@ class DashboardHome extends DashboardState {
   DashboardHome() : super(DashboardPage.home.index);
 
   @override
-  String get route => 'home';
+  String get route => '/home';
 }
 
 class DashboardPost extends DashboardState {
@@ -26,5 +26,5 @@ class DashboardAccount extends DashboardState {
   DashboardAccount() : super(DashboardPage.account.index);
 
   @override
-  String get route => 'account';
+  String get route => '/account';
 }
